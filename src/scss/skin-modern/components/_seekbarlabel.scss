@@ -14,8 +14,8 @@
 
   // Center container on left edge to get it centered over timeline position
   %center-on-left-edge {
-    margin-left: -50%;
-    margin-right: 50%;
+    margin-left: var(--preview-margin, -50%);
+    margin-right: var(--preview-margin, 50%);
     position: relative;
   }
 
@@ -34,8 +34,10 @@
       border-width: .5em;
       content: ' ';
       height: 0;
-      left: 50%;
-      margin-left: -.5em;
+      left: var(--preview-arrow-left, 50%);
+      right: var(--preview-arrow-right, 'auto');
+      margin-left: var(--preview-arrow-margin-left, -.5em);
+      margin-right: var(--preview-arrow-margin-right, -.5em);
       pointer-events: none;
       position: absolute;
       top: 100%;
@@ -46,7 +48,7 @@
       position: relative;
 
       .#{$prefix}-seekbar-thumbnail {
-        width: 6em;
+        width: 16em;
       }
 
       .#{$prefix}-seekbar-label-metadata {

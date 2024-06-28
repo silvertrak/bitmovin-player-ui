@@ -596,7 +596,7 @@ export class DOM {
   private setCss(propertyName: string, value: string): DOM {
     this.forEach((element) => {
       // <any> cast to resolve TS7015: http://stackoverflow.com/a/36627114/370252
-      element.style[<any>propertyName] = value;
+      element.style.setProperty(<any>propertyName, value);
     });
     return this;
   }

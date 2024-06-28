@@ -874,6 +874,26 @@ export class SeekBar extends Component<SeekBarConfig> {
   }
 
   /**
+   * get the pixel position of the playback position indicator.
+   * @param percent a number between 0 and 100 as returned by the player
+   */
+  getPlaybackPosition(percent: number) {
+    // Calculate the position of the marker
+    let totalSize = this.config.vertical
+      ? this.seekBar.height() - this.seekBarPlaybackPositionMarker.height()
+      : this.seekBar.width();
+    let px = (totalSize / 100) * percent;
+    if (this.config.vertical) {
+      px =
+        this.seekBar.height() -
+        px -
+        this.seekBarPlaybackPositionMarker.height();
+    }
+
+    return px;
+  }
+
+  /**
    * Sets the position of the playback position indicator.
    * @param percent a number between 0 and 100 as returned by the player
    */
@@ -1029,9 +1049,51 @@ export class SeekBar extends Component<SeekBarConfig> {
     }
 
     if (this.label) {
-      this.label.getDomElement().css({
-        'left': seekPositionPercentage + '%',
-      });
+      if (seekPositionPercentage < 10 || seekPositionPercentage > 90) {
+        const px = this.getPlaybackPosition(seekPositionPercentage);
+        this.label
+          .getDomElement()
+          .css(
+            seekPositionPercentage < 10
+              ? { left: '-0.5em', right: 'auto' }
+              : { right: '-0.5em', left: 'auto' },
+          );
+        this.label
+          .getDomElement()
+          .css(
+            '--preview-arrow-margin-left',
+            seekPositionPercentage < 10 ? px + 'px' : 'auto',
+          );
+        this.label
+          .getDomElement()
+          .css(
+            '--preview-arrow-margin-right',
+            seekPositionPercentage > 90
+              ? (px * 100) / seekPositionPercentage - px + 'px'
+              : 'auto',
+          );
+        this.label
+          .getDomElement()
+          .css(
+            '--preview-arrow-left',
+            seekPositionPercentage < 10 ? '0' : '100%',
+          );
+        this.label
+          .getDomElement()
+          .css(
+            '--preview-arrow-right',
+            seekPositionPercentage > 90 ? '0' : 'auto',
+          );
+        this.label.getDomElement().css('--preview-margin', '0');
+      } else {
+        this.label.getDomElement().css({
+          left: seekPositionPercentage + '%',
+          right: 'auto',
+        });
+        this.label.getDomElement().removeCss('--preview-arrow-margin-left');
+        this.label.getDomElement().removeCss('--preview-arrow-left');
+        this.label.getDomElement().removeCss('--preview-margin');
+      }
     }
 
     this.seekBarEvents.onSeekPreview.dispatch(this, {
