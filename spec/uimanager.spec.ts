@@ -181,12 +181,14 @@ describe('UIManager', () => {
       it('attaches the listener', () => {
         const onSpy = jest.spyOn(playerMock, 'on');
 
-        new UIManager(playerMock, MockHelper.generateDOMMock() as any);
+        const uiContainer = new UIContainer({ components: [new Container({})] });
+        new UIManager(playerMock, uiContainer);
         expect(onSpy).toHaveBeenCalledWith('playlisttransition', expect.any(Function));
       });
       describe('and a PlaylistTransition event occurs', () => {
         it('dispatches onUpdated', () => {
-          const uiManager = new UIManager(playerMock, MockHelper.generateDOMMock() as any);
+          const uiContainer = new UIContainer({ components: [new Container({})] });
+          const uiManager = new UIManager(playerMock, uiContainer);
           let onUpdatedSpy = jest.fn();
           (uiManager.getConfig() as InternalUIConfig).events.onUpdated.subscribe(onUpdatedSpy);
 
@@ -202,7 +204,8 @@ describe('UIManager', () => {
       it('does not attach a listener', () => {
         const onSpy = jest.spyOn(playerMock, 'on');
 
-        new UIManager(playerMock, MockHelper.generateDOMMock() as any);
+        const uiContainer = new UIContainer({ components: [new Container({})] });
+        new UIManager(playerMock, uiContainer);
         expect(onSpy).not.toHaveBeenCalledWith('playlisttransition', expect.any(Function));
       });
     });

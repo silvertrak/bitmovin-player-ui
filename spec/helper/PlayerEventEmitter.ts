@@ -75,6 +75,8 @@ export class PlayerEventEmitter {
       size: 1,
       duration: 1,
       isInit: false,
+      timeToFirstByte: 0,
+      url: 'http://localhost',
     });
   }
 
@@ -249,14 +251,14 @@ export class PlayerEventEmitter {
       sourceQuality: {
         id: '1',
         bitrate: 250_000,
-        width: null,
-        height: null,
+        width: 100,
+        height: 200,
       },
       targetQuality: {
         id: '2',
         bitrate: bitrate,
-        width: null,
-        height: null,
+        width: 100,
+        height: 200,
       },
     });
   }
