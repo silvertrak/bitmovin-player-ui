@@ -11,6 +11,7 @@
   pointer-events: none;
   position: absolute;
   text-align: center;
+  width: 25%;
 
   // Center container on left edge to get it centered over timeline position
   %center-on-left-edge {
@@ -48,7 +49,7 @@
       position: relative;
 
       .#{$prefix}-seekbar-thumbnail {
-        width: 16em;
+        width: 100% !important;
       }
 
       .#{$prefix}-seekbar-label-metadata {

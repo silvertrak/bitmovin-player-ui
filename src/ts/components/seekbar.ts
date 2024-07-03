@@ -1049,41 +1049,30 @@ export class SeekBar extends Component<SeekBarConfig> {
     }
 
     if (this.label) {
-      if (seekPositionPercentage < 10 || seekPositionPercentage > 90) {
+      if (seekPositionPercentage < 12 || seekPositionPercentage > 88) {
         const px = this.getPlaybackPosition(seekPositionPercentage);
         this.label
           .getDomElement()
           .css(
-            seekPositionPercentage < 10
+            seekPositionPercentage < 12
               ? { left: '-0.5em', right: 'auto' }
               : { right: '-0.5em', left: 'auto' },
           );
         this.label
           .getDomElement()
-          .css(
-            '--preview-arrow-margin-left',
-            seekPositionPercentage < 10 ? px + 'px' : 'auto',
-          );
+          .css('--preview-arrow-margin-left', seekPositionPercentage < 12 ? px + 'px' : 'auto');
         this.label
           .getDomElement()
           .css(
             '--preview-arrow-margin-right',
-            seekPositionPercentage > 90
-              ? (px * 100) / seekPositionPercentage - px + 'px'
-              : 'auto',
+            seekPositionPercentage > 88 ? (px * 100) / seekPositionPercentage - px + 'px' : 'auto',
           );
         this.label
           .getDomElement()
-          .css(
-            '--preview-arrow-left',
-            seekPositionPercentage < 10 ? '0' : '100%',
-          );
+          .css('--preview-arrow-left', seekPositionPercentage < 12 ? '0' : '100%');
         this.label
           .getDomElement()
-          .css(
-            '--preview-arrow-right',
-            seekPositionPercentage > 90 ? '0' : 'auto',
-          );
+          .css('--preview-arrow-right', seekPositionPercentage > 88 ? '0' : 'auto');
         this.label.getDomElement().css('--preview-margin', '0');
       } else {
         this.label.getDomElement().css({
