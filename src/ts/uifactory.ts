@@ -135,24 +135,25 @@ export namespace UIFactory {
         settingsPanel,
         new Container({
           components: [
-            new PlaybackTimeLabel({
-              timeLabelMode: PlaybackTimeLabelMode.CurrentTime,
-              hideInLivePlayback: true,
-            }),
             new SeekBar({ label: new SeekBarLabel() }),
-            new PlaybackTimeLabel({
+            /* new PlaybackTimeLabel({
               timeLabelMode: PlaybackTimeLabelMode.TotalTime,
               cssClasses: ['text-right'],
-            }),
+            }), */
           ],
           cssClasses: ['controlbar-top'],
         }),
         new Container({
           components: [
             new PlaybackToggleButton(),
+            new PlaybackTimeLabel({
+              timeLabelMode: PlaybackTimeLabelMode.CurrentAndTotalTime,
+              hideInLivePlayback: true,
+              cssClasses: ['my-1'],
+            }),
+            new Spacer(),
             new VolumeToggleButton(),
             new VolumeSlider(),
-            new Spacer(),
             new PictureInPictureToggleButton(),
             new AirPlayToggleButton(),
             new CastToggleButton(),

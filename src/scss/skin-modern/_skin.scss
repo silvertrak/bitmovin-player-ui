@@ -76,6 +76,10 @@
     text-align: right;
   }
 
+  .#{$prefix}-my-1 {
+    margin: auto 0.5em;
+  }
+
   // sass-lint:disable force-element-nesting
   &.#{$prefix}-layout-max-width-400 {
     // Hide the description in ultra tiny players to not clog the UI too much
