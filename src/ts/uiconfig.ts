@@ -125,4 +125,16 @@ export interface UIConfig {
    * Specifies if the `EcoModeToggleButton` should be displayed within the `SettingsPanel`
    */
   ecoMode?: boolean;
+
+  /**
+   * seek interval in seconds/frames
+   * Default is 1.
+   */
+  forwardRewindInterval?: number;
+
+  /**
+   * frame or second interval
+   * Default is true.
+   */
+  enableForwardRewindFrameInterval?: boolean;
 }

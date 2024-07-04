@@ -43,6 +43,8 @@
   "speed": "Speed",
   "playPause" : "Play/Pause",
   "play": "Play",
+  "rewind": "Rewind",
+  "forward": "Forward",
   "pause": "Pause",
   "open": "open",
   "close": "Close",

@@ -1,0 +1,12 @@
+@import '../variables';
+@import '../mixins';
+
+.#{$prefix}-ui-rewindbutton {
+  @extend %ui-button;
+
+  background-image: url('../../assets/skin-modern/images/prev.svg');
+
+  &:hover {
+    @include svg-icon-shadow;
+  }
+}

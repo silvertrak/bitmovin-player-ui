@@ -1,0 +1,12 @@
+@import '../variables';
+@import '../mixins';
+
+.#{$prefix}-ui-forwardbutton {
+  @extend %ui-button;
+
+  background-image: url('../../assets/skin-modern/images/next.svg');
+
+  &:hover {
+    @include svg-icon-shadow;
+  }
+}

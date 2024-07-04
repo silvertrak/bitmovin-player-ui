@@ -16,6 +16,8 @@ import { PlaybackTimeLabel, PlaybackTimeLabelMode } from './components/playbackt
 import { SeekBar } from './components/seekbar';
 import { SeekBarLabel } from './components/seekbarlabel';
 import { PlaybackToggleButton } from './components/playbacktogglebutton';
+import { RewindButton } from './components/rewindbutton';
+import { ForwardButton } from './components/forwardbutton';
 import { VolumeToggleButton } from './components/volumetogglebutton';
 import { VolumeSlider } from './components/volumeslider';
 import { Spacer } from './components/spacer';
@@ -145,7 +147,9 @@ export namespace UIFactory {
         }),
         new Container({
           components: [
+            new RewindButton(),
             new PlaybackToggleButton(),
+            new ForwardButton(),
             new PlaybackTimeLabel({
               timeLabelMode: PlaybackTimeLabelMode.CurrentAndTotalTime,
               hideInLivePlayback: true,
