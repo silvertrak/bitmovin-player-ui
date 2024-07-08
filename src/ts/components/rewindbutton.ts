@@ -1,6 +1,6 @@
 import { ToggleButton, ToggleButtonConfig } from './togglebutton';
 import { UIInstanceManager } from '../uimanager';
-// import { PlayerUtils } from '../playerutils';
+import { FrameAccurateUtils } from '../frameaccurateutils';
 import { PlayerAPI, WarningEvent } from 'bitmovin-player';
 import { i18n } from '../localization/i18n';
 
@@ -10,12 +10,6 @@ export interface RewindButtonConfig extends ToggleButtonConfig {
    * Default is 1.
    */
   forwardRewindInterval?: number;
-
-  /**
-   * frame or second interval
-   * Default is false.
-   */
-  enableForwardRewindFrameInterval?: boolean;
 }
 
 /**
@@ -47,15 +41,9 @@ export class RewindButton extends ToggleButton<RewindButtonConfig> {
   ): void {
     super.configure(player, uimanager);
 
-    // Set enableForwardRewindFrameInterval if set in the uimanager config
+    // Set forwardRewindInterval if set in the uimanager config
     if (typeof uimanager.getConfig().forwardRewindInterval === 'number') {
       this.config.forwardRewindInterval = uimanager.getConfig().forwardRewindInterval;
-    }
-
-    // Set enableForwardRewindFrameInterval if set in the uimanager config
-    if (typeof uimanager.getConfig().enableForwardRewindFrameInterval === 'boolean') {
-      this.config.enableForwardRewindFrameInterval =
-        uimanager.getConfig().enableForwardRewindFrameInterval;
     }
 
     let isSeeking = false;
@@ -146,9 +134,17 @@ export class RewindButton extends ToggleButton<RewindButtonConfig> {
           );
         }
 
-        player.seek(
-          Math.max(0, player.getCurrentTime() - (this.config?.forwardRewindInterval ?? 1)),
-        );
+        uimanager.getConfig().metadata?.frameRate
+          ? player.seek(
+              FrameAccurateUtils.adjustedTimeByFrame(
+                Math.max(0, player.getCurrentTime()),
+                uimanager.getConfig().metadata.frameRate,
+                -(this.config?.forwardRewindInterval ?? 1),
+              ),
+            )
+          : player.seek(
+              Math.max(0, player.getCurrentTime() - (this.config?.forwardRewindInterval ?? 1)),
+            );
       });
     }
 
