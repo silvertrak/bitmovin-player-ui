@@ -28,7 +28,6 @@ export class SeekBarLabel extends Container<SeekBarLabelConfig> {
   private thumbnailImageLoader: ImageLoader;
 
   private timeFormat: string;
-  private frameRate: number;
 
   private appliedMarkerCssClasses: string[] = [];
   private player: PlayerAPI;
@@ -64,11 +63,10 @@ export class SeekBarLabel extends Container<SeekBarLabelConfig> {
     this.uiManager = uimanager;
     uimanager.onSeekPreview.subscribeRateLimited(this.handleSeekPreview, 100);
 
-    this.frameRate = uimanager.getConfig().metadata?.frameRate;
-
     let init = () => {
-      // Set time format depending on frame rate existing
-      this.timeFormat = this.frameRate ? StringUtils.FORMAT_HHMMSSFF : StringUtils.FORMAT_HHMMSS;
+      // Set time format depending on source duration
+      this.timeFormat = Math.abs(player.isLive() ? player.getMaxTimeShift() : player.getDuration()) >= 3600 ?
+        StringUtils.FORMAT_HHMMSS : StringUtils.FORMAT_MMSS;
       // Set initial state of title and thumbnail to handle sourceLoaded when switching to a live-stream
       this.setTitleText(null);
       this.setThumbnail(null);
@@ -140,7 +138,7 @@ export class SeekBarLabel extends Container<SeekBarLabelConfig> {
    * @param seconds the time in seconds to display on the label
    */
   setTime(seconds: number) {
-    this.setText(StringUtils.secondsToTime(seconds, this.timeFormat, this.frameRate));
+    this.setText(StringUtils.secondsToTime(seconds, this.timeFormat));
   }
 
   /**
