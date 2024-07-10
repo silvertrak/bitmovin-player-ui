@@ -109,6 +109,7 @@ export namespace MockHelper {
         isViewModeAvailable: jest.fn(),
         seek: jest.fn(),
         isMuted: jest.fn(),
+        setPosterImage: jest.fn(),
 
         // Event faker
         eventEmitter: eventHelper,

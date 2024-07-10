@@ -285,6 +285,12 @@ export class SeekBar extends Component<SeekBarConfig> {
 
         if ((isInInitialStartupState || isNeitherPausedNorPlaying) && !this.isSeeking()) {
           this.setPlaybackPosition(playbackPositionPercentage);
+          if (isNeitherPausedNorPlaying) {
+            player.setPosterImage(
+              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+              false,
+            );
+          }
         }
 
         this.setAriaSliderMinMax('0', player.getDuration().toString());
