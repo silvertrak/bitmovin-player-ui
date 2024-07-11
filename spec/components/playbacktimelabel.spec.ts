@@ -62,7 +62,7 @@ describe('PlaybackTimeLabel', () => {
       jest.spyOn(playerMock, 'getCurrentTime').mockReturnValue(30);
 
       playbackTimeLabel.configure(playerMock, uiInstanceManagerMock);
-      expect(playbackTimeLabel.getText()).toEqual('01:10');
+      expect(playbackTimeLabel.getText()).toEqual('00:01:10:00');
     });
 
     it('displays the total time mm:ss if duration is lower than 1 hour', () => {
@@ -75,7 +75,7 @@ describe('PlaybackTimeLabel', () => {
 
       jest.spyOn(playerMock, 'getDuration').mockReturnValue(100);
       playbackTimeLabel.configure(playerMock, uiInstanceManagerMock);
-      expect(playbackTimeLabel.getText()).toEqual('01:40');
+      expect(playbackTimeLabel.getText()).toEqual('00:01:40:00');
     });
 
     it('displays the total time hh:mm:ss if duration is greater than 1 hour', () => {
@@ -88,7 +88,7 @@ describe('PlaybackTimeLabel', () => {
 
       jest.spyOn(playerMock, 'getDuration').mockReturnValue(3600);
       playbackTimeLabel.configure(playerMock, uiInstanceManagerMock);
-      expect(playbackTimeLabel.getText()).toEqual('01:00:00');
+      expect(playbackTimeLabel.getText()).toEqual('01:00:00:00');
     });
 
     it('updates time format on ready event', () => {
@@ -101,11 +101,11 @@ describe('PlaybackTimeLabel', () => {
 
       jest.spyOn(playerMock, 'getDuration').mockReturnValue(0);
       playbackTimeLabel.configure(playerMock, uiInstanceManagerMock);
-      expect(playbackTimeLabel.getText()).toEqual('00:00');
+      expect(playbackTimeLabel.getText()).toEqual('00:00:00:00');
 
       jest.spyOn(playerMock, 'getDuration').mockReturnValue(3600);
       playerMock.eventEmitter.fireReadyEvent();
-      expect(playbackTimeLabel.getText()).toEqual('01:00:00');
+      expect(playbackTimeLabel.getText()).toEqual('01:00:00:00');
     });
   });
 

@@ -53,6 +53,7 @@ export interface UIConfig {
     title?: string;
     description?: string;
     markers?: TimelineMarker[];
+    frameRate?: number;
   };
   // TODO move recommendations into metadata in next major release
   recommendations?: UIRecommendationConfig[];
@@ -131,10 +132,4 @@ export interface UIConfig {
    * Default is 1.
    */
   forwardRewindInterval?: number;
-
-  /**
-   * frame or second interval
-   * Default is true.
-   */
-  enableForwardRewindFrameInterval?: boolean;
 }

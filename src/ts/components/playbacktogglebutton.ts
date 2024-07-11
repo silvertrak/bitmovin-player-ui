@@ -3,6 +3,7 @@ import {UIInstanceManager} from '../uimanager';
 import {PlayerUtils} from '../playerutils';
 import { PlayerAPI, WarningEvent } from 'bitmovin-player';
 import { i18n } from '../localization/i18n';
+import { FrameAccurateUtils } from '../frameaccurateutils';
 
 export interface PlaybackToggleButtonConfig extends ToggleButtonConfig {
   /**
@@ -17,9 +18,13 @@ export interface PlaybackToggleButtonConfig extends ToggleButtonConfig {
  * A button that toggles between playback and pause.
  */
 export class PlaybackToggleButton extends ToggleButton<PlaybackToggleButtonConfig> {
-
   private static readonly CLASS_STOPTOGGLE = 'stoptoggle';
   protected isPlayInitiated: boolean;
+
+  /**
+   * Flag needed to detect playing -> pause transitions
+   */
+  protected hasBeenPlaying: boolean;
 
   constructor(config: PlaybackToggleButtonConfig = {}) {
     super(config);
@@ -32,6 +37,7 @@ export class PlaybackToggleButton extends ToggleButton<PlaybackToggleButtonConfi
     }, this.config);
 
     this.isPlayInitiated = false;
+    this.hasBeenPlaying = false;
   }
 
   configure(player: PlayerAPI, uimanager: UIInstanceManager, handleClickEvent: boolean = true): void {
@@ -69,11 +75,22 @@ export class PlaybackToggleButton extends ToggleButton<PlaybackToggleButtonConfi
 
     player.on(player.exports.PlayerEvent.Paused, (e) => {
       this.isPlayInitiated = false;
+      /**
+       * When SMPTE is enabled, play + pause leads to an incorrect video.currentTime (off by 1 frame
+       * most of the time) in some browsers. To reproduce try play + pause at some point in the video. Then save the current Time, seek
+       * somewhere else and then back to the previous current time ... you will see a different Frame.
+       * In order to avoid this mess, when we encounter play + pause we seek to the calculated SMPTE.
+       */
+      if (this.hasBeenPlaying && uimanager.getConfig().metadata?.frameRate) {
+        this.hasBeenPlaying = false;
+        player.seek(FrameAccurateUtils.adjustedTimeByFrame(player.getCurrentTime(), uimanager.getConfig().metadata.frameRate, 0));
+      }
       playbackStateHandler();
     });
 
     player.on(player.exports.PlayerEvent.Playing, (e) => {
       this.isPlayInitiated = false;
+      this.hasBeenPlaying = true;
       playbackStateHandler();
     });
     // after unloading + loading a new source, the player might be in a different playing state (from playing into stopped)

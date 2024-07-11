@@ -43,8 +43,8 @@ export interface PlaybackTimeLabelConfig extends LabelConfig {
  * or any string through {@link PlaybackTimeLabel#setText setText}.
  */
 export class PlaybackTimeLabel extends Label<PlaybackTimeLabelConfig> {
-
   private timeFormat: string;
+  private frameRate: number;
 
   constructor(config: PlaybackTimeLabelConfig = {}) {
     super(config);
@@ -135,9 +135,9 @@ export class PlaybackTimeLabel extends Label<PlaybackTimeLabelConfig> {
     };
 
     let updateTimeFormatBasedOnDuration = () => {
-      // Set time format depending on source duration
-      this.timeFormat = Math.abs(player.isLive() ? player.getMaxTimeShift() : player.getDuration()) >= 3600 ?
-      StringUtils.FORMAT_HHMMSS : StringUtils.FORMAT_MMSS;
+      this.frameRate = uimanager.getConfig().metadata?.frameRate;
+      // Set time format depending on frame rate existing
+      this.timeFormat = this.frameRate ? StringUtils.FORMAT_HHMMSSFF : StringUtils.FORMAT_HHMMSS;
       playbackTimeHandler();
     };
 
@@ -173,8 +173,8 @@ export class PlaybackTimeLabel extends Label<PlaybackTimeLabelConfig> {
    * @param durationSeconds the total duration in seconds
    */
   setTime(playbackSeconds: number, durationSeconds: number) {
-    let currentTime = StringUtils.secondsToTime(playbackSeconds, this.timeFormat);
-    let totalTime = StringUtils.secondsToTime(durationSeconds, this.timeFormat);
+    let currentTime = StringUtils.secondsToTime(playbackSeconds, this.timeFormat, this.frameRate);
+    let totalTime = StringUtils.secondsToTime(durationSeconds, this.timeFormat, this.frameRate);
 
     switch ((<PlaybackTimeLabelConfig>this.config).timeLabelMode) {
       case PlaybackTimeLabelMode.CurrentTime:
@@ -187,7 +187,7 @@ export class PlaybackTimeLabel extends Label<PlaybackTimeLabelConfig> {
         this.setText(`${currentTime} / ${totalTime}`);
         break;
       case PlaybackTimeLabelMode.RemainingTime:
-        let remainingTime = StringUtils.secondsToTime(durationSeconds - playbackSeconds, this.timeFormat);
+        let remainingTime = StringUtils.secondsToTime(durationSeconds - playbackSeconds, this.timeFormat, this.frameRate);
         this.setText(`${remainingTime}`);
         break;
     }

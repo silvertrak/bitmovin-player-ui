@@ -19,25 +19,29 @@ export namespace MockHelper {
   }
 
   export function getUiInstanceManagerMock(): UIInstanceManager {
-    const UiInstanceManagerMockClass: jest.Mock<UIInstanceManager> = jest.fn().mockImplementation(() => ({
-      onConfigured: getEventDispatcherMock(),
-      getConfig: jest.fn().mockReturnValue({
-        events: {
-          onUpdated: getEventDispatcherMock(),
-        },
-        metadata: {
-          markers: [],
-        },
-      }),
-      onControlsShow: getEventDispatcherMock(),
-      onControlsHide: getEventDispatcherMock(),
-      onComponentHide: getEventDispatcherMock(),
-      onComponentShow: getEventDispatcherMock(),
-      onSeekPreview: getEventDispatcherMock(),
-      onSeek: getEventDispatcherMock(),
-      onSeeked: getEventDispatcherMock(),
-      onRelease: getEventDispatcherMock(),
-    }));
+    const UiInstanceManagerMockClass: jest.Mock<UIInstanceManager> = jest
+      .fn()
+      .mockImplementation(() => ({
+        onConfigured: getEventDispatcherMock(),
+        getConfig: jest.fn().mockReturnValue({
+          events: {
+            onUpdated: getEventDispatcherMock(),
+          },
+          metadata: {
+            frameRate: 24,
+            markers: [],
+          },
+          enableForwardRewindFrameInterval: true,
+        }),
+        onControlsShow: getEventDispatcherMock(),
+        onControlsHide: getEventDispatcherMock(),
+        onComponentHide: getEventDispatcherMock(),
+        onComponentShow: getEventDispatcherMock(),
+        onSeekPreview: getEventDispatcherMock(),
+        onSeek: getEventDispatcherMock(),
+        onSeeked: getEventDispatcherMock(),
+        onRelease: getEventDispatcherMock(),
+      }));
 
     return new UiInstanceManagerMockClass();
   }

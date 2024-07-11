@@ -1,8 +1,9 @@
 import { PlayerAPI } from 'bitmovin-player';
 import { i18n } from './localization/i18n';
+import { FrameAccurateUtils } from './frameaccurateutils';
 
 export namespace StringUtils {
-
+  export let FORMAT_HHMMSSFF: string = 'hh:mm:ss:ff';
   export let FORMAT_HHMMSS: string = 'hh:mm:ss';
   export let FORMAT_MMSS: string = 'mm:ss';
 
@@ -13,13 +14,17 @@ export namespace StringUtils {
    * @param format the time format to output (default: hh:mm:ss)
    * @returns {string} the formatted time string
    */
-  export function secondsToTime(totalSeconds: number, format: string = FORMAT_HHMMSS): string {
+  export function secondsToTime(totalSeconds: number, format: string = FORMAT_HHMMSS, frameRate?: number): string {
     let isNegative = totalSeconds < 0;
 
     if (isNegative) {
       // If the time is negative, we make it positive for the calculation below
       // (else we'd get all negative numbers) and reattach the negative sign later.
       totalSeconds = -totalSeconds;
+    }
+
+    if (format === FORMAT_HHMMSSFF) {
+      return FrameAccurateUtils.getCurrentSmpte(totalSeconds, frameRate);
     }
 
     // Split into separate time parts
