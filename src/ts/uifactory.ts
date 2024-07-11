@@ -41,7 +41,7 @@ import { AdSkipButton } from './components/adskipbutton';
 import { CloseButton } from './components/closebutton';
 import { MetadataLabel, MetadataLabelContent } from './components/metadatalabel';
 import { PlayerUtils } from './playerutils';
-import { Label } from './components/label';
+import { Label, LabelConfig } from './components/label';
 import { CastUIContainer } from './components/castuicontainer';
 import { UIConditionContext, UIManager } from './uimanager';
 import { UIConfig } from './uiconfig';
@@ -151,9 +151,18 @@ export namespace UIFactory {
             new PlaybackToggleButton(),
             new ForwardButton(),
             new PlaybackTimeLabel({
-              timeLabelMode: PlaybackTimeLabelMode.CurrentAndTotalTime,
+              timeLabelMode: PlaybackTimeLabelMode.CurrentTime,
               hideInLivePlayback: true,
+              cssClasses: ['m-1'],
+            }),
+            new Label<LabelConfig>({
+              text: '/',
               cssClasses: ['my-1'],
+            }),
+            new PlaybackTimeLabel({
+              timeLabelMode: PlaybackTimeLabelMode.TotalTime,
+              hideInLivePlayback: true,
+              cssClasses: ['m-1'],
             }),
             new Spacer(),
             new VolumeToggleButton(),

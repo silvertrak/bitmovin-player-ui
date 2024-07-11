@@ -78,8 +78,13 @@
     text-align: right;
   }
 
-  .#{$prefix}-my-1 {
+  .#{$prefix}-m-1 {
     margin: auto 0.5em;
+  }
+
+  .#{$prefix}-my-1 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
 
   // sass-lint:disable force-element-nesting

@@ -64,6 +64,11 @@ export class PlaybackTimeLabel extends Label<PlaybackTimeLabelConfig> {
     let liveCssClass = this.prefixCss('ui-playbacktimelabel-live');
     let liveEdgeCssClass = this.prefixCss('ui-playbacktimelabel-live-edge');
     let minWidth = 0;
+    this.frameRate = uimanager.getConfig().metadata?.frameRate;
+
+    if (this.frameRate && (<PlaybackTimeLabelConfig>this.config).timeLabelMode === PlaybackTimeLabelMode.CurrentTime) {
+      this.onClick.subscribe(() => this.copyCurrentTime(PlayerUtils.getCurrentTimeRelativeToSeekableRange(player)));
+    }
 
     let liveClickHandler = () => {
       player.timeShift(0);
@@ -135,7 +140,6 @@ export class PlaybackTimeLabel extends Label<PlaybackTimeLabelConfig> {
     };
 
     let updateTimeFormatBasedOnDuration = () => {
-      this.frameRate = uimanager.getConfig().metadata?.frameRate;
       // Set time format depending on frame rate existing
       this.timeFormat = this.frameRate ? StringUtils.FORMAT_HHMMSSFF : StringUtils.FORMAT_HHMMSS;
       playbackTimeHandler();
@@ -191,6 +195,15 @@ export class PlaybackTimeLabel extends Label<PlaybackTimeLabelConfig> {
         this.setText(`${remainingTime}`);
         break;
     }
+  }
+
+  /**
+   * Copy the current time to the clipboard
+   * @param playbackSeconds
+   */
+  copyCurrentTime(playbackSeconds: number) {
+    let currentTime = StringUtils.secondsToTime(playbackSeconds, this.timeFormat, this.frameRate);
+    navigator.clipboard.writeText(currentTime);
   }
 
   /**
