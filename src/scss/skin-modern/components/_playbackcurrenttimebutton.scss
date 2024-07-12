@@ -1,0 +1,17 @@
+@import '../variables';
+@import '../mixins';
+
+.#{$prefix}-ui-playbackcurrenttimebutton {
+
+  color: #fff;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  margin: auto 0.5em;
+
+  @include focusable;
+
+  &:hover {
+    @include svg-icon-shadow;
+  }
+}

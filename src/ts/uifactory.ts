@@ -53,6 +53,7 @@ import { SpatialNavigation } from './spatialnavigation/spatialnavigation';
 import { RootNavigationGroup } from './spatialnavigation/rootnavigationgroup';
 import { ListNavigationGroup, ListOrientation } from './spatialnavigation/ListNavigationGroup';
 import { EcoModeContainer } from './components/ecomodecontainer';
+import { PlaybackCurrentTimeButton } from './components/playbackcurrenttimebutton';
 
 export namespace UIFactory {
   export function buildDefaultUI(player: PlayerAPI, config: UIConfig = {}): UIManager {
@@ -150,11 +151,7 @@ export namespace UIFactory {
             new RewindButton(),
             new PlaybackToggleButton(),
             new ForwardButton(),
-            new PlaybackTimeLabel({
-              timeLabelMode: PlaybackTimeLabelMode.CurrentTime,
-              hideInLivePlayback: true,
-              cssClasses: ['m-1'],
-            }),
+            new PlaybackCurrentTimeButton(),
             new Label<LabelConfig>({
               text: '/',
               cssClasses: ['my-1'],
