@@ -54,6 +54,8 @@ import { RootNavigationGroup } from './spatialnavigation/rootnavigationgroup';
 import { ListNavigationGroup, ListOrientation } from './spatialnavigation/ListNavigationGroup';
 import { EcoModeContainer } from './components/ecomodecontainer';
 import { PlaybackCurrentTimeButton } from './components/playbackcurrenttimebutton';
+import { KeyboardShortcutsSettingsPanelPage } from './components/keyboardshortcutssettingspanelpage';
+import { KeyboardShortcutsSettingsLabel } from './components/keyboardshortcutssettingslabel';
 
 export namespace UIFactory {
   export function buildDefaultUI(player: PlayerAPI, config: UIConfig = {}): UIManager {
@@ -132,6 +134,29 @@ export namespace UIFactory {
     );
 
     settingsPanel.addComponent(subtitleSettingsPanelPage);
+
+    let keyboardShortcutsSettingsPanelPage = new KeyboardShortcutsSettingsPanelPage({
+      settingsPanel: settingsPanel,
+    });
+
+    // const subtitleSelectBox = new SubtitleSelectBox();
+
+    let keyboardShortcutsSettingsOpenButton = new SettingsPanelPageOpenButton({
+      targetPage: keyboardShortcutsSettingsPanelPage,
+      container: settingsPanel,
+      ariaLabel: i18n.getLocalizer('settings.keyboardShortcuts.view'),
+      text: i18n.getLocalizer('open'),
+    });
+
+    mainSettingsPanelPage.addComponent(
+      new KeyboardShortcutsSettingsLabel({
+        text: i18n.getLocalizer('settings.keyboardShortcuts.view'),
+        opener: keyboardShortcutsSettingsOpenButton,
+        cssClasses: ['ui-keyboard-shortcuts-opan-panel'],
+      }),
+    );
+
+    settingsPanel.addComponent(keyboardShortcutsSettingsPanelPage);
 
     let controlBar = new ControlBar({
       components: [

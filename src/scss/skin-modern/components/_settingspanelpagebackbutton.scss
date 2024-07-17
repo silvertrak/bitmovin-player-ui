@@ -5,7 +5,7 @@
 
   font-size: .8em;
   position: relative;
-  width: 8em;
+  width: 6em;
 
   .#{$prefix}-label {
     display: inline-block;
@@ -15,7 +15,7 @@
       border-left: .2em solid $color-primary;
       content: '';
       height: .6em;
-      margin-left: -.8em;
+      margin-left: -1em;
       position: absolute;
       top: .6em;
       transform: rotate(45deg);

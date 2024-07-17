@@ -41,7 +41,7 @@
   "settings": "Settings",
   "fullscreen" : "Fullscreen",
   "speed": "Speed",
-  "playPause" : "Play/Pause",
+  "playPause": "Play / Pause",
   "play": "Play",
   "rewind": "Rewind",
   "forward": "Forward",
@@ -74,5 +74,11 @@
   "seekBar.timeshift": "Timeshift",
   "seekBar.durationText": "out of",
   "quickseek.forward": "Fast Forward",
-  "quickseek.rewind": "Rewind"
+  "quickseek.rewind": "Rewind",
+  "settings.keyboardShortcuts": "Keyboard Shortcuts",
+  "settings.keyboardShortcuts.view": "View Keyboard Shortcuts",
+  "settings.keyboardShortcuts.fullscreen": "Toggle fullscreen",
+  "settings.keyboardShortcuts.volume.mute": "Toggle mute",
+  "settings.keyboardShortcuts.volume.reduce": "Reduce volume by 5%",
+  "settings.keyboardShortcuts.volume.increase": "Increase volume by 5%"
 }

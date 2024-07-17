@@ -79,6 +79,10 @@
     text-align: right;
   }
 
+  .#{$prefix}-text-center {
+    text-align: center;
+  }
+
   .#{$prefix}-m-1 {
     margin: auto 0.5em;
   }
