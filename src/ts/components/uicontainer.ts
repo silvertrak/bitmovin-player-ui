@@ -7,6 +7,7 @@ import { CancelEventArgs, EventDispatcher } from '../eventdispatcher';
 import { PlayerAPI, PlayerResizedEvent } from 'bitmovin-player';
 import { i18n } from '../localization/i18n';
 import { Button, ButtonConfig } from './button';
+import { PlayerKeyboardControl } from '../playerkeyboardcontrol';
 
 /**
  * Configuration interface for a {@link UIContainer}.
@@ -87,6 +88,8 @@ export class UIContainer extends Container<UIContainerConfig> {
 
     this.configureUIShowHide(player, uimanager);
     this.configurePlayerStates(player, uimanager);
+
+    new PlayerKeyboardControl(player);
   }
 
   private configureUIShowHide(player: PlayerAPI, uimanager: UIInstanceManager): void {
