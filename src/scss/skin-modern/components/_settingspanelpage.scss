@@ -23,6 +23,8 @@
         padding: 1em 0;
         margin: 0;
         border-top: 1px solid transparentize($color-secondary, 0.7);
+
+        // sass-lint:disable nesting-depth
         .#{$prefix}-ui-settingspanelpageopenbutton {
           background-image: url('../../assets/skin-modern/images/playlist.svg');
         }
@@ -37,8 +39,8 @@
   }
 
   .#{$prefix}-ui-settings-panel-item {
-    border-bottom: 1px solid transparentize($color-secondary, .7);
-    padding: .5em 0;
+    border-bottom: 1px solid transparentize($color-secondary, 0.7);
+    padding: 0.5em 0;
     white-space: nowrap;
 
     &.#{$prefix}-last {
@@ -53,13 +55,16 @@
   &.#{$prefix}-ui-keyboard-shortcuts-view-pannel {
     .#{$prefix}-ui-label {
       margin: 0;
+
       &:first-child {
         width: 150px;
       }
+
       &:last-child {
         width: 50px;
       }
     }
+
     .#{$prefix}-ui-settingstogglebutton {
       background-image: url('../../assets/skin-modern/images/close.svg');
       background-size: 15px 15px;
