@@ -47,22 +47,46 @@ class DefaultPlayerKeymap implements PlayerKeyMap {
       }
     },
   };
-  seek_plus5_sec = <KeyToFunctionBinding>{
+  seek_plus1_sec = <KeyToFunctionBinding>{
+    keyBinding: 'shift+right',
+    callback: (player: SupportedPlayerTypes) => {
+      player.seek(Math.min(player.getDuration(), player.getCurrentTime() + 1));
+    },
+  };
+  seek_minus1_sec = <KeyToFunctionBinding>{
+    keyBinding: 'shift+left',
+    callback: (player: SupportedPlayerTypes) => {
+      player.seek(Math.max(0, player.getCurrentTime() - 1));
+    },
+  };
+  seek_plus1_min = <KeyToFunctionBinding>{
+    keyBinding: 'alt+right',
+    callback: (player: SupportedPlayerTypes) => {
+      player.seek(Math.min(player.getDuration(), player.getCurrentTime() + 60));
+    },
+  };
+  seek_minus1_min = <KeyToFunctionBinding>{
+    keyBinding: 'alt+left',
+    callback: (player: SupportedPlayerTypes) => {
+      player.seek(Math.max(0, player.getCurrentTime() - 60));
+    },
+  };
+  seek_plus1_frame = <KeyToFunctionBinding>{
     keyBinding: 'right',
     callback: (player: SupportedPlayerTypes) => {
-      player.seek(Math.min(player.getDuration(), player.getCurrentTime() + 5));
+      player.seek(Math.min(player.getDuration(), player.getCurrentTime() + 1));
+    },
+  };
+  seek_minus1_frame = <KeyToFunctionBinding>{
+    keyBinding: 'left',
+    callback: (player: SupportedPlayerTypes) => {
+      player.seek(Math.max(0, player.getCurrentTime() - 1));
     },
   };
   seek_plus10_sec = <KeyToFunctionBinding>{
     keyBinding: 'ctrl+right / command+right',
     callback: (player: SupportedPlayerTypes) => {
       player.seek(Math.min(player.getDuration(), player.getCurrentTime() + 10));
-    },
-  };
-  seek_minus5_sec = <KeyToFunctionBinding>{
-    keyBinding: 'left',
-    callback: (player: SupportedPlayerTypes) => {
-      player.seek(Math.max(0, player.getCurrentTime() - 5));
     },
   };
   seek_minus10_sec = <KeyToFunctionBinding>{
@@ -163,9 +187,13 @@ interface PlayerKeyMap {
   toggle_mute: KeyToFunctionBinding;
   enter_fullscreen: KeyToFunctionBinding;
   exit_fullscreen: KeyToFunctionBinding;
-  seek_plus5_sec: KeyToFunctionBinding;
+  seek_plus1_frame: KeyToFunctionBinding;
+  seek_minus1_frame: KeyToFunctionBinding;
+  seek_plus1_sec: KeyToFunctionBinding;
+  seek_minus1_sec: KeyToFunctionBinding;
+  seek_plus1_min: KeyToFunctionBinding;
+  seek_minus1_min: KeyToFunctionBinding;
   seek_plus10_sec: KeyToFunctionBinding;
-  seek_minus5_sec: KeyToFunctionBinding;
   seek_minus10_sec: KeyToFunctionBinding;
   volume_plus5: KeyToFunctionBinding;
   volume_plus10: KeyToFunctionBinding;
