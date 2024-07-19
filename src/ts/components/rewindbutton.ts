@@ -135,16 +135,8 @@ export class RewindButton extends ToggleButton<RewindButtonConfig> {
         }
 
         uimanager.getConfig().metadata?.frameRate
-          ? player.seek(
-              FrameAccurateUtils.adjustedTimeByFrame(
-                Math.max(0, player.getCurrentTime()),
-                uimanager.getConfig().metadata.frameRate,
-                -(this.config?.forwardRewindInterval ?? 1),
-              ),
-            )
-          : player.seek(
-              Math.max(0, player.getCurrentTime() - (this.config?.forwardRewindInterval ?? 1)),
-            );
+          ? player.seek(FrameAccurateUtils.adjustedTimeByFrame(player.getCurrentTime(), uimanager.getConfig().metadata.frameRate, -(this.config?.forwardRewindInterval ?? 1)))
+          : player.seek(Math.max(0, player.getCurrentTime() - (this.config?.forwardRewindInterval ?? 1)));
       });
     }
 
