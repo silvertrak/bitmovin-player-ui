@@ -178,28 +178,30 @@ interface KeyToFunctionBinding {
   keyBinding: string;
 }
 
+interface PlayerKeyConfigMap {
+  toggle_play?: KeyToFunctionBinding;
+  toggle_mute?: KeyToFunctionBinding;
+  enter_fullscreen?: KeyToFunctionBinding;
+  exit_fullscreen?: KeyToFunctionBinding;
+  seek_plus1_frame?: KeyToFunctionBinding;
+  seek_minus1_frame?: KeyToFunctionBinding;
+  seek_plus1_sec?: KeyToFunctionBinding;
+  seek_minus1_sec?: KeyToFunctionBinding;
+  seek_plus1_min?: KeyToFunctionBinding;
+  seek_minus1_min?: KeyToFunctionBinding;
+  seek_plus10_sec?: KeyToFunctionBinding;
+  seek_minus10_sec?: KeyToFunctionBinding;
+  volume_plus5?: KeyToFunctionBinding;
+  volume_plus10?: KeyToFunctionBinding;
+  volume_minus5?: KeyToFunctionBinding;
+  volume_minus10?: KeyToFunctionBinding;
+}
+
 /**
  * Definition of all player functions which are bound to a keystroke by default.
  * It is possible to configure any number of unknown KeyToFunctionBindings via the player configuration
  */
-interface PlayerKeyMap {
-  toggle_play: KeyToFunctionBinding;
-  toggle_mute: KeyToFunctionBinding;
-  enter_fullscreen: KeyToFunctionBinding;
-  exit_fullscreen: KeyToFunctionBinding;
-  seek_plus1_frame: KeyToFunctionBinding;
-  seek_minus1_frame: KeyToFunctionBinding;
-  seek_plus1_sec: KeyToFunctionBinding;
-  seek_minus1_sec: KeyToFunctionBinding;
-  seek_plus1_min: KeyToFunctionBinding;
-  seek_minus1_min: KeyToFunctionBinding;
-  seek_plus10_sec: KeyToFunctionBinding;
-  seek_minus10_sec: KeyToFunctionBinding;
-  volume_plus5: KeyToFunctionBinding;
-  volume_plus10: KeyToFunctionBinding;
-  volume_minus5: KeyToFunctionBinding;
-  volume_minus10: KeyToFunctionBinding;
-
+interface PlayerKeyMap extends PlayerKeyConfigMap {
   /**
    * Retrieves a collection of all bindings of this KeyMap
    */
@@ -226,15 +228,15 @@ export class PlayerKeyboardControl {
   private player: SupportedPlayerTypes;
   private shouldPreventScrolling: boolean;
 
-  constructor(wrappedPlayer: SupportedPlayerTypes, preventPageScroll = true, config?: PlayerKeyMap) {
+  constructor(wrappedPlayer: SupportedPlayerTypes, preventPageScroll = true, config?: PlayerKeyConfigMap) {
     this.player = wrappedPlayer;
     this.shouldPreventScrolling = preventPageScroll;
-    let paramKeyMap: PlayerKeyMap | undefined;
+    let paramKeyMap: PlayerKeyConfigMap | undefined;
     if (config) {
       paramKeyMap = config;
     }
 
-    this.keyMap = new DefaultPlayerKeymap();
+    this.keyMap = PlayerKeyboardControl.mergeConfigWithDefault(paramKeyMap);
 
     // default to enabled
     // this also registers the event listeners
@@ -292,29 +294,24 @@ export class PlayerKeyboardControl {
     this.disable(true);
   }
 
-  /* protected static mergeConfigWithDefault(
-        paramKeyMap: PlayerKeyMap | undefined
-    ): PlayerKeyMap {
-        let retVal: PlayerKeyMap = new DefaultPlayerKeymap()
-        if (paramKeyMap) {
-            // allow overwrites to the default player keymap as well as new listeners
-            for (let attr in paramKeyMap) {
-                if (attr && paramKeyMap[attr as keyof PlayerKeyMap]) {
-                    let toCheck = paramKeyMap[attr as keyof PlayerKeyMap]
-                    // avoid wrong configs and check for elements being real keyListeners
-                    if (toCheck['keyBinding'] && toCheck['callback']) {
-                        retVal[attr as keyof PlayerKeyMap] =
-                            paramKeyMap[attr as keyof PlayerKeyMap]
-                    } else {
-                        console.log(
-                            'Invalid Key Listener at params[' + attr + ']'
-                        )
-                    }
-                }
-            }
+  protected static mergeConfigWithDefault(paramKeyMap: PlayerKeyConfigMap | undefined): PlayerKeyMap {
+    let retVal = new DefaultPlayerKeymap();
+    if (paramKeyMap) {
+      // allow overwrites to the default player keymap as well as new listeners
+      for (let attr in paramKeyMap) {
+        if (attr && paramKeyMap[attr as keyof PlayerKeyConfigMap]) {
+          let toCheck = paramKeyMap[attr as keyof PlayerKeyConfigMap];
+          // avoid wrong configs and check for elements being real keyListeners
+          if (toCheck['keyBinding'] && toCheck['callback']) {
+            retVal[attr as keyof PlayerKeyConfigMap] = paramKeyMap[attr as keyof PlayerKeyConfigMap];
+          } else {
+            console.log('Invalid Key Listener at params[' + attr + ']');
+          }
         }
-        return retVal
-    } */
+      }
+    }
+    return retVal;
+  }
 
   public preventScrolling = (event: KeyboardEvent) => {
     const code = event.code;

@@ -81,6 +81,8 @@
   "settings.keyboardShortcuts.volume.mute": "Toggle mute",
   "settings.keyboardShortcuts.volume.reduce": "Reduce volume by 5%",
   "settings.keyboardShortcuts.volume.increase": "Increase volume by 5%",
+  "settings.keyboardShortcuts.seek.minus.one.frame": "Go back 1 frame",
+  "settings.keyboardShortcuts.seek.plus.one.frame": " Go forward 1 frame",
   "settings.keyboardShortcuts.seek.minus.one.sec": "Go back 1 second",
   "settings.keyboardShortcuts.seek.plus.one.sec": " Go forward 1 second",
   "settings.keyboardShortcuts.seek.minus.one.min": "Go back 1 minute",

@@ -74,6 +74,13 @@ export class KeyboardShortcutsSettingsPanelPage extends SettingsPanelPage {
             }),
           ),
           new SettingsPanelItem(
+            i18n.getLocalizer('settings.keyboardShortcuts.seek.minus.one.frame'),
+            new Label<LabelConfig>({
+              text: '←',
+              cssClasses: ['text-center'],
+            }),
+          ),
+          new SettingsPanelItem(
             i18n.getLocalizer('settings.keyboardShortcuts.seek.minus.one.sec'),
             new Label<LabelConfig>({
               text: 'Shift + ←',
@@ -84,6 +91,13 @@ export class KeyboardShortcutsSettingsPanelPage extends SettingsPanelPage {
             i18n.getLocalizer('settings.keyboardShortcuts.seek.minus.one.min'),
             new Label<LabelConfig>({
               text: 'Alt + ←',
+              cssClasses: ['text-center'],
+            }),
+          ),
+          new SettingsPanelItem(
+            i18n.getLocalizer('settings.keyboardShortcuts.seek.plus.one.frame'),
+            new Label<LabelConfig>({
+              text: '→',
               cssClasses: ['text-center'],
             }),
           ),

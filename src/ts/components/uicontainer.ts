@@ -8,6 +8,7 @@ import { PlayerAPI, PlayerResizedEvent } from 'bitmovin-player';
 import { i18n } from '../localization/i18n';
 import { Button, ButtonConfig } from './button';
 import { PlayerKeyboardControl } from '../playerkeyboardcontrol';
+import { FrameAccurateUtils } from '../frameaccurateutils';
 
 /**
  * Configuration interface for a {@link UIContainer}.
@@ -89,7 +90,26 @@ export class UIContainer extends Container<UIContainerConfig> {
     this.configureUIShowHide(player, uimanager);
     this.configurePlayerStates(player, uimanager);
 
-    new PlayerKeyboardControl(player);
+    let playerKeyboardConfig;
+
+    if (uimanager.getConfig().metadata?.frameRate) {
+      playerKeyboardConfig = {
+        seek_plus1_frame: {
+          keyBinding: 'right',
+          callback: (player: PlayerAPI) => {
+            player.seek(FrameAccurateUtils.adjustedTimeByFrame(player.getCurrentTime(), uimanager.getConfig().metadata.frameRate, 1));
+          },
+        },
+        seek_minus1_frame: {
+          keyBinding: 'left',
+          callback: (player: PlayerAPI) => {
+            player.seek(FrameAccurateUtils.adjustedTimeByFrame(player.getCurrentTime(), uimanager.getConfig().metadata.frameRate, -1));
+          },
+        },
+      };
+    }
+
+    new PlayerKeyboardControl(player, true, playerKeyboardConfig);
   }
 
   private configureUIShowHide(player: PlayerAPI, uimanager: UIInstanceManager): void {
