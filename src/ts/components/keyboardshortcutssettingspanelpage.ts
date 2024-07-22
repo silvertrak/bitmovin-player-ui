@@ -53,6 +53,13 @@ export class KeyboardShortcutsSettingsPanelPage extends SettingsPanelPage {
             }),
           ),
           new SettingsPanelItem(
+            i18n.getLocalizer('settings.keyboardShortcuts.timecodeCopy'),
+            new Label<LabelConfig>({
+              text: 'C',
+              cssClasses: ['text-center'],
+            }),
+          ),
+          new SettingsPanelItem(
             i18n.getLocalizer('settings.keyboardShortcuts.volume.mute'),
             new Label<LabelConfig>({
               text: 'M',

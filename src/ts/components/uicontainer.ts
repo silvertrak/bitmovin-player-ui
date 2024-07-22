@@ -9,6 +9,7 @@ import { i18n } from '../localization/i18n';
 import { Button, ButtonConfig } from './button';
 import { PlayerKeyboardControl } from '../playerkeyboardcontrol';
 import { FrameAccurateUtils } from '../frameaccurateutils';
+import { StringUtils } from '../stringutils';
 
 /**
  * Configuration interface for a {@link UIContainer}.
@@ -92,8 +93,19 @@ export class UIContainer extends Container<UIContainerConfig> {
 
     let playerKeyboardConfig;
 
+    playerKeyboardConfig = {
+      copy_timecode: {
+        keyBinding: 'c',
+        callback: (player: PlayerAPI) => {
+          let currentTime = uimanager.getConfig().metadata?.frameRate ? StringUtils.secondsToTime(player.getCurrentTime(), StringUtils.FORMAT_HHMMSSFF, uimanager.getConfig().metadata.frameRate) : StringUtils.secondsToTime(player.getCurrentTime(), StringUtils.FORMAT_HHMMSS);
+          navigator.clipboard.writeText(currentTime);
+        },
+      },
+    };
+
     if (uimanager.getConfig().metadata?.frameRate) {
       playerKeyboardConfig = {
+        ...playerKeyboardConfig,
         seek_plus1_frame: {
           keyBinding: 'right',
           callback: (player: PlayerAPI) => {

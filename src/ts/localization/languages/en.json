@@ -78,6 +78,7 @@
   "settings.keyboardShortcuts": "Keyboard Shortcuts",
   "settings.keyboardShortcuts.view": "View Keyboard Shortcuts",
   "settings.keyboardShortcuts.fullscreen": "Toggle fullscreen",
+  "settings.keyboardShortcuts.timecodeCopy": "Copy current timecode",
   "settings.keyboardShortcuts.volume.mute": "Toggle mute",
   "settings.keyboardShortcuts.volume.reduce": "Reduce volume by 5%",
   "settings.keyboardShortcuts.volume.increase": "Increase volume by 5%",

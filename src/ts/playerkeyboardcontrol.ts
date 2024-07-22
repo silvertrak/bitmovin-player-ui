@@ -47,6 +47,10 @@ class DefaultPlayerKeymap implements PlayerKeyMap {
       }
     },
   };
+  copy_timecode = <KeyToFunctionBinding>{
+    keyBinding: 'c',
+    callback: undefined,
+  };
   seek_plus1_sec = <KeyToFunctionBinding>{
     keyBinding: 'shift+right',
     callback: (player: SupportedPlayerTypes) => {
@@ -183,6 +187,7 @@ interface PlayerKeyConfigMap {
   toggle_mute?: KeyToFunctionBinding;
   enter_fullscreen?: KeyToFunctionBinding;
   exit_fullscreen?: KeyToFunctionBinding;
+  copy_timecode?: KeyToFunctionBinding;
   seek_plus1_frame?: KeyToFunctionBinding;
   seek_minus1_frame?: KeyToFunctionBinding;
   seek_plus1_sec?: KeyToFunctionBinding;
