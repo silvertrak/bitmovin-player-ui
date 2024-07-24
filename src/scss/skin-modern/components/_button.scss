@@ -32,7 +32,7 @@
     font-size: 0.8em;
     z-index: 2;
 
-    &:before {
+    &::before {
       border-left: 4px solid transparent;
       border-right: 4px solid transparent;
       border-top: 4px solid rgba(0, 0, 0, 0.8);
@@ -47,7 +47,8 @@
     &.center {
       left: 50%;
       transform: translate(-50%);
-      &:before {
+
+      &::before {
         left: 50%;
         transform: translate(-50%);
       }
@@ -55,14 +56,16 @@
 
     &.left {
       left: 0;
-      &:before {
+
+      &::before {
         left: 12px;
       }
     }
 
     &.right {
       right: 0;
-      &:before {
+
+      &::before {
         right: 12px;
       }
     }
