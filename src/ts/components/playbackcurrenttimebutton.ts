@@ -29,6 +29,7 @@ export class PlaybackCurrentTimeButton extends Button<PlaybackCurrentTimeButtonC
       <PlaybackCurrentTimeButtonConfig>{
         cssClass: 'ui-playbackcurrenttimebutton',
         hideInLivePlayback: false,
+        ariaLabel: i18n.getLocalizer('settings.keyboardShortcuts.timecodeCopy'),
       },
       this.config,
     );
@@ -104,13 +105,13 @@ export class PlaybackCurrentTimeButton extends Button<PlaybackCurrentTimeButtonC
 
       // To avoid 'jumping' in the UI by varying label sizes due to non-monospaced fonts,
       // we gradually increase the min-width with the content to reach a stable size.
-      let width = this.getDomElement().width();
+      /* let width = this.getDomElement().width();
       if (width > minWidth) {
         minWidth = width;
         this.getDomElement().css({
           'min-width': minWidth + 'px',
         });
-      }
+      } */
     };
 
     let updateTimeFormatBasedOnDuration = () => {

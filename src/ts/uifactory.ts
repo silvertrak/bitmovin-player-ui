@@ -176,7 +176,7 @@ export namespace UIFactory {
             new RewindButton(),
             new PlaybackToggleButton(),
             new ForwardButton(),
-            new PlaybackCurrentTimeButton(),
+            new PlaybackCurrentTimeButton({ label: new Label({ text: i18n.getLocalizer('settings.keyboardShortcuts.timecodeCopy') }) }),
             new Label<LabelConfig>({
               text: '/',
               cssClasses: ['my-1'],

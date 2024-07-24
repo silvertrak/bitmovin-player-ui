@@ -2,6 +2,7 @@ import {ComponentConfig, Component} from './component';
 import {DOM} from '../dom';
 import {EventDispatcher, NoArgs, Event} from '../eventdispatcher';
 import { LocalizableText , i18n } from '../localization/i18n';
+import { Label, LabelConfig } from './label';
 
 /**
  * Configuration interface for a {@link Button} component.
@@ -22,12 +23,18 @@ export interface ButtonConfig extends ComponentConfig {
    * Default: false
    */
   acceptsTouchWithUiHidden?: boolean;
+
+  /**
+   * The label above the seek position.
+   */
+  label?: Label<LabelConfig>;
 }
 
 /**
  * A simple clickable button.
  */
 export class Button<Config extends ButtonConfig> extends Component<Config> {
+  private label: Label<LabelConfig>;
 
   private buttonEvents = {
     onClick: new EventDispatcher<Button<Config>, NoArgs>(),
@@ -42,6 +49,8 @@ export class Button<Config extends ButtonConfig> extends Component<Config> {
       tabIndex: 0,
       acceptsTouchWithUiHidden: false,
     } as Config, this.config);
+
+    this.label = this.config.label;
   }
 
   protected toDomElement(): DOM {
@@ -70,6 +79,14 @@ export class Button<Config extends ButtonConfig> extends Component<Config> {
     buttonElement.on('click', () => {
       this.onClickEvent();
     });
+
+    if (this.label) {
+      let tooltipWrapper = new DOM('span', {
+        class: this.prefixCss('tooltip'),
+      });
+      tooltipWrapper.append(this.label.getDomElement());
+      buttonElement.append(tooltipWrapper);
+    }
 
     return buttonElement;
   }

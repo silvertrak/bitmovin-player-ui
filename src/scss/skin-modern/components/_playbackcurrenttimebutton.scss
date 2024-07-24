@@ -2,6 +2,8 @@
 @import '../mixins';
 
 .#{$prefix}-ui-playbackcurrenttimebutton {
+  @extend %ui-button;
+
   @include focusable;
 
   color: #fff;
@@ -9,6 +11,11 @@
   border: 0;
   padding: 0;
   margin: auto 0.5em;
+  min-width: auto;
+
+  .#{$prefix}-label {
+    display: block;
+  }
 
   &:hover {
     @include svg-icon-shadow;
