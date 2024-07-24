@@ -14,7 +14,7 @@
   font-size: 1em;
   height: 1.5em;
   min-width: 1.5em;
-  padding: .25em;
+  padding: 0.25em;
 
   .#{$prefix}-label {
     color: $color-primary;
@@ -25,10 +25,8 @@
     display: none;
     position: absolute;
     top: -100%;
-    left: 50%;
-    translate: -50% -50%;
-    color: #4a5464;
-    background-color: rgba(255, 255, 255, .9);
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 0.5em;
     border-radius: 2px;
     font-size: 0.8em;
@@ -37,16 +35,37 @@
     &:before {
       border-left: 4px solid transparent;
       border-right: 4px solid transparent;
-      border-top: 4px solid rgba(255, 255, 255, .9);
+      border-top: 4px solid rgba(0, 0, 0, 0.8);
       bottom: -4px;
-      content: "";
+      content: '';
       height: 0;
-      left: 50%;
       position: absolute;
-      transform: translate(-50%);
       width: 0;
       z-index: 2;
-  }
+    }
+
+    &.center {
+      left: 50%;
+      transform: translate(-50%);
+      &:before {
+        left: 50%;
+        transform: translate(-50%);
+      }
+    }
+
+    &.left {
+      left: 0;
+      &:before {
+        left: 12px;
+      }
+    }
+
+    &.right {
+      right: 0;
+      &:before {
+        right: 12px;
+      }
+    }
   }
 
   &:hover {

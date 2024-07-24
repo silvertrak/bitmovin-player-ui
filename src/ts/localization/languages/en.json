@@ -49,6 +49,7 @@
   "open": "open",
   "close": "Close",
   "pictureInPicture": "Picture-in-Picture",
+  "pip": "Toggle PIP",
   "appleAirplay" : "Apple AirPlay",
   "googleCast": "Google Cast",
   "vr" : "VR",

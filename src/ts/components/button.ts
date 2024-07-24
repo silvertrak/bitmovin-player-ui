@@ -25,16 +25,23 @@ export interface ButtonConfig extends ComponentConfig {
   acceptsTouchWithUiHidden?: boolean;
 
   /**
-   * The label above the seek position.
+   * The tooltip label above the button.
    */
-  label?: Label<LabelConfig>;
+  tooltipLabel?: Label<LabelConfig>;
+
+  /**
+   * The direction of the tooltip label above the button.
+   * Default: 'center'
+   */
+  tooltipDirection?: 'center' | 'left' | 'right';
 }
 
 /**
  * A simple clickable button.
  */
 export class Button<Config extends ButtonConfig> extends Component<Config> {
-  private label: Label<LabelConfig>;
+  private tooltipLabel: Label<LabelConfig>;
+  private tooltipDirection: 'center' | 'left' | 'right';
 
   private buttonEvents = {
     onClick: new EventDispatcher<Button<Config>, NoArgs>(),
@@ -50,7 +57,8 @@ export class Button<Config extends ButtonConfig> extends Component<Config> {
       acceptsTouchWithUiHidden: false,
     } as Config, this.config);
 
-    this.label = this.config.label;
+    this.tooltipLabel = this.config.tooltipLabel;
+    this.tooltipDirection = this.config.tooltipDirection || 'center';
   }
 
   protected toDomElement(): DOM {
@@ -80,11 +88,11 @@ export class Button<Config extends ButtonConfig> extends Component<Config> {
       this.onClickEvent();
     });
 
-    if (this.label) {
+    if (this.tooltipLabel) {
       let tooltipWrapper = new DOM('span', {
-        class: this.prefixCss('tooltip'),
+        class: this.prefixCss(`tooltip ${this.tooltipDirection}`),
       });
-      tooltipWrapper.append(this.label.getDomElement());
+      tooltipWrapper.append(this.tooltipLabel.getDomElement());
       buttonElement.append(tooltipWrapper);
     }
 
