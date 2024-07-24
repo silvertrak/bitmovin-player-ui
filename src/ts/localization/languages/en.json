@@ -88,5 +88,6 @@
   "settings.keyboardShortcuts.seek.minus.one.sec": "Go back 1 second",
   "settings.keyboardShortcuts.seek.plus.one.sec": " Go forward 1 second",
   "settings.keyboardShortcuts.seek.minus.one.min": "Go back 1 minute",
-  "settings.keyboardShortcuts.seek.plus.one.min": " Go forward 1 minute"
+  "settings.keyboardShortcuts.seek.plus.one.min": " Go forward 1 minute",
+  "copied": "Copied to clipboard!"
 }

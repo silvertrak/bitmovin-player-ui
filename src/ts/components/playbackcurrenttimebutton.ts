@@ -20,6 +20,7 @@ export interface PlaybackCurrentTimeButtonConfig extends ButtonConfig {
 export class PlaybackCurrentTimeButton extends Button<PlaybackCurrentTimeButtonConfig> {
   private timeFormat: string;
   private frameRate: number | undefined;
+  private timeoutId: NodeJS.Timeout;
 
   constructor(config: PlaybackCurrentTimeButtonConfig = {}) {
     super(config);
@@ -45,7 +46,12 @@ export class PlaybackCurrentTimeButton extends Button<PlaybackCurrentTimeButtonC
     let minWidth = 0;
     this.frameRate = uimanager.getConfig().metadata?.frameRate;
 
-    this.onClick.subscribe(() => this.copyCurrentTime(PlayerUtils.getCurrentTimeRelativeToSeekableRange(player)));
+    this.onClick.subscribe(() => {
+      clearTimeout(this.timeoutId);
+      this.copyCurrentTime(PlayerUtils.getCurrentTimeRelativeToSeekableRange(player));
+      this.setTooltipLabel(i18n.getLocalizer('copied'));
+      this.timeoutId = setTimeout(() => this.setTooltipLabel(i18n.getLocalizer('settings.keyboardShortcuts.timecodeCopy')), 500);
+    });
 
     let liveClickHandler = () => {
       player.timeShift(0);

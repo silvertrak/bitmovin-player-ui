@@ -107,6 +107,14 @@ export class Button<Config extends ButtonConfig> extends Component<Config> {
     this.getDomElement().find('.' + this.prefixCss('label')).html(i18n.performLocalization(text));
   }
 
+  /**
+   * Sets text on the tooltip label of the button.
+   * @param text
+   */
+  setTooltipLabel(text: LocalizableText): void {
+    this.getDomElement().find('.' + this.prefixCss('tooltip')).html(i18n.performLocalization(text));
+  }
+
   protected onClickEvent() {
     this.buttonEvents.onClick.dispatch(this);
   }
