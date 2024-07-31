@@ -64,6 +64,6 @@
     "postcss": "^8.4.38"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "@silvertrak:registry": "https://npm.pkg.github.com/"
   }
 }
