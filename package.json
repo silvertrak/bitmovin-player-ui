@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitmovin/bitmovin-player-ui.git"
+    "url": "git+https://github.com/silvertrak/bitmovin-player-ui.git"
   },
   "author": "Bitmovin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bitmovin/bitmovin-player-ui/issues"
+    "url": "https://github.com/silvertrak/bitmovin-player-ui/issues"
   },
-  "homepage": "https://github.com/bitmovin/bitmovin-player-ui#readme",
+  "homepage": "https://github.com/silvertrak/bitmovin-player-ui#readme",
   "browserslist": [
     "> 1%",
     "last 2 versions",
@@ -62,5 +62,8 @@
   },
   "dependencies": {
     "postcss": "^8.4.38"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
