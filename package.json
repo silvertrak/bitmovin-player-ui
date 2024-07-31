@@ -5,6 +5,7 @@
   "main": "./dist/js/framework/main.js",
   "types": "./dist/js/framework/main.d.ts",
   "scripts": {
+    "build": "gulp npm-prepare",
     "test": "npx jest"
   },
   "repository": {
