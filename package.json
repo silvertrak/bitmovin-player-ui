@@ -1,5 +1,5 @@
 {
-  "name": "@silvertrak/bitmovin-player-ui",
+  "name": "@mr/bitmovin-player-ui",
   "version": "3.67.0",
   "description": "Bitmovin Player UI Framework",
   "main": "./dist/js/framework/main.js",
