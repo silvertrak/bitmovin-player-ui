@@ -1,6 +1,6 @@
 {
-  "name": "@mr/bitmovin-player-ui",
-  "version": "3.67.0",
+  "name": "@silvertrak/bitmovin-player-ui",
+  "version": "3.67.1",
   "description": "Bitmovin Player UI Framework",
   "main": "./dist/js/framework/main.js",
   "types": "./dist/js/framework/main.d.ts",
@@ -63,5 +63,8 @@
   },
   "dependencies": {
     "postcss": "^8.4.38"
+  },
+  "publishConfig": {
+    "@silvertrak:registry": "https://npm.pkg.github.com/"
   }
 }
