@@ -5,6 +5,9 @@ import { PlayerAPI, WarningEvent } from 'bitmovin-player';
 import { i18n } from '../localization/i18n';
 import { FrameAccurateUtils } from '../frameaccurateutils';
 
+/**
+ * @category Configs
+ */
 export interface PlaybackToggleButtonConfig extends ToggleButtonConfig {
   /**
    * Specify whether the player should be set to enter fullscreen by clicking on the playback toggle button
@@ -16,6 +19,8 @@ export interface PlaybackToggleButtonConfig extends ToggleButtonConfig {
 
 /**
  * A button that toggles between playback and pause.
+ *
+ * @category Buttons
  */
 export class PlaybackToggleButton extends ToggleButton<PlaybackToggleButtonConfig> {
   private static readonly CLASS_STOPTOGGLE = 'stoptoggle';

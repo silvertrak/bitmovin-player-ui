@@ -6,6 +6,8 @@ import { Label, LabelConfig } from './label';
 
 /**
  * Configuration interface for a {@link Button} component.
+ *
+ * @category Configs
  */
 export interface ButtonConfig extends ComponentConfig {
   /**
@@ -38,6 +40,8 @@ export interface ButtonConfig extends ComponentConfig {
 
 /**
  * A simple clickable button.
+ *
+ * @category Components
  */
 export class Button<Config extends ButtonConfig> extends Component<Config> {
   private tooltipLabel: Label<LabelConfig>;

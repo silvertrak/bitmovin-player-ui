@@ -13,6 +13,8 @@ import { StringUtils } from '../stringutils';
 
 /**
  * Configuration interface for a {@link UIContainer}.
+ *
+ * @category Configs
  */
 export interface UIContainerConfig extends ContainerConfig {
   /**
@@ -43,6 +45,8 @@ export interface UIContainerConfig extends ContainerConfig {
 /**
  * The base container that contains all of the UI. The UIContainer is passed to the {@link UIManager} to build and
  * setup the UI.
+ *
+ * @category Containers
  */
 export class UIContainer extends Container<UIContainerConfig> {
 
