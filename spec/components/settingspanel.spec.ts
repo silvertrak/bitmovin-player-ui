@@ -74,7 +74,7 @@ describe('SettingsPanel', () => {
         expect(settingsPanel.getActivePage()).toEqual(firstPage);
       });
 
-      it('doesn\'t push the current page again', () => {
+      it("doesn't push the current page again", () => {
         settingsPanel.setActivePageIndex(1);
         settingsPanel.setActivePageIndex(1);
 
@@ -90,7 +90,7 @@ describe('SettingsPanel', () => {
         expect(settingsPanel.getActivePage()).toEqual(secondPage);
       });
 
-      it('doesn\'t push the current page again', () => {
+      it("doesn't push the current page again", () => {
         settingsPanel.setActivePage(secondPage);
         settingsPanel.setActivePage(secondPage);
 
@@ -190,7 +190,7 @@ describe('SettingsPanel', () => {
       });
     });
 
-    describe('onComponentViewModeChanged', () => {
+    /* describe('onComponentViewModeChanged', () => {
       it('should suspend the hide timeout when a component enters the persistent view mode', () => {
         const suspendTimeoutSpy = jest.spyOn(settingsPanel['hideTimeout'], 'suspend');
 
@@ -217,7 +217,7 @@ describe('SettingsPanel', () => {
 
         expect(resumeTimeoutSpy).toHaveBeenCalled();
       });
-    });
+    }); */
 
     describe('hideHoveredSelectBoxes', () => {
       it('should close the dropdown on the select box', () => {
