@@ -2,6 +2,7 @@ import { PlayerAPI, PlayerEvent } from 'bitmovin-player';
 import { UIInstanceManager } from '../../src/ts/uimanager';
 import { DOM } from '../../src/ts/dom';
 import { PlayerEventEmitter } from './PlayerEventEmitter';
+import { UIContainer } from '../../src/ts/components/uicontainer';
 
 jest.mock('../../src/ts/dom');
 
@@ -18,30 +19,37 @@ export namespace MockHelper {
     };
   }
 
+  export function getUiMock(): UIContainer {
+    return {
+      onPlayerStateChange: jest.fn().mockReturnValue({ subscribe: jest.fn() }),
+    } as unknown as UIContainer;
+  }
+
   export function getUiInstanceManagerMock(): UIInstanceManager {
-    const UiInstanceManagerMockClass: jest.Mock<UIInstanceManager> = jest
-      .fn()
-      .mockImplementation(() => ({
-        onConfigured: getEventDispatcherMock(),
-        getConfig: jest.fn().mockReturnValue({
-          events: {
-            onUpdated: getEventDispatcherMock(),
-          },
-          metadata: {
-            frameRate: 24,
-            markers: [],
-          },
-          enableForwardRewindFrameInterval: true,
-        }),
-        onControlsShow: getEventDispatcherMock(),
-        onControlsHide: getEventDispatcherMock(),
-        onComponentHide: getEventDispatcherMock(),
-        onComponentShow: getEventDispatcherMock(),
-        onSeekPreview: getEventDispatcherMock(),
-        onSeek: getEventDispatcherMock(),
-        onSeeked: getEventDispatcherMock(),
-        onRelease: getEventDispatcherMock(),
-      }));
+    const uiMock = getUiMock();
+    const UiInstanceManagerMockClass: jest.Mock<UIInstanceManager> = jest.fn().mockImplementation(() => ({
+      onConfigured: getEventDispatcherMock(),
+      getConfig: jest.fn().mockReturnValue({
+        events: {
+          onUpdated: getEventDispatcherMock(),
+        },
+        metadata: {
+          frameRate: 24,
+          markers: [],
+        },
+        enableForwardRewindFrameInterval: true,
+      }),
+      getUI: () => uiMock,
+      onControlsShow: getEventDispatcherMock(),
+      onControlsHide: getEventDispatcherMock(),
+      onComponentHide: getEventDispatcherMock(),
+      onComponentShow: getEventDispatcherMock(),
+      onSeekPreview: getEventDispatcherMock(),
+      onSeek: getEventDispatcherMock(),
+      onSeeked: getEventDispatcherMock(),
+      onRelease: getEventDispatcherMock(),
+      onComponentViewModeChanged: getEventDispatcherMock(),
+    }));
 
     return new UiInstanceManagerMockClass();
   }

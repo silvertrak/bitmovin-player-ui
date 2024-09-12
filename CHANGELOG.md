@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.73.0] - 2024-09-06
+
+### Added
+- `Component` now has a `ViewMode` that can either be `Persistent` or `Temporary`
+
+### Fixed
+- `selectbox` dropdown not closing in Safari when the UI is hidden
+
+### Changed
+- `selectbox` now sets its `ViewMode` to `Persistent` whenever and as long as the select-dropdown is shown
+- `uicontainer` and `settingspanel` will no longer auto-hide if there are any components that are in the `Persistent` view mode
+
 ## [3.72.0] - 2024-08-30
 
 ### Added
@@ -996,6 +1008,7 @@ Version 2.0 of the UI framework is built for player 7.1. If absolutely necessary
 ## 1.0.0 (2017-02-03)
 - First release
 
+[3.73.0]: https://github.com/bitmovin/bitmovin-player-ui/compare/v3.72.0...v3.73.0
 [3.72.0]: https://github.com/bitmovin/bitmovin-player-ui/compare/v3.71.0...v3.72.0
 [3.71.0]: https://github.com/bitmovin/bitmovin-player-ui/compare/v3.70.0...v3.71.0
 [3.70.0]: https://github.com/bitmovin/bitmovin-player-ui/compare/v3.69.0...v3.70.0
