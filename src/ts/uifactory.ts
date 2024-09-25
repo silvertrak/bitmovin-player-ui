@@ -219,6 +219,7 @@ export namespace UIFactory {
         PlayerUtils.PlayerState.Paused,
         PlayerUtils.PlayerState.Finished,
       ],
+      userInteractionEventSource: document.querySelector('#player'),
     });
   }
 
