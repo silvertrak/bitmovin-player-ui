@@ -263,13 +263,13 @@ export class PlayerKeyboardControl {
       // in order to stop the browser from scrolling we have to add an additional onKeyDown listener
       // because the browser would scroll on that one already
       if (this.shouldPreventScrolling) {
-        document.querySelector('.bitmovinplayer-container').addEventListener('keydown', this.preventScrolling, false);
+        document.querySelector('.bitmovinplayer-container')?.addEventListener('keydown', this.preventScrolling, false);
       }
-      document.querySelector('.bitmovinplayer-container').addEventListener('keyup', this.handleKeyEvent, false);
+      document.querySelector('.bitmovinplayer-container')?.addEventListener('keyup', this.handleKeyEvent, false);
     } else {
-      // document.querySelector('.bitmovinplayer-container').addEventListener('keypress', this.handleKeyEvent, false);
-      document.querySelector('.bitmovinplayer-container').removeEventListener('keydown', this.preventScrolling, false);
-      document.querySelector('.bitmovinplayer-container').removeEventListener('keyup', this.handleKeyEvent, false);
+      // document.querySelector('.bitmovinplayer-container')?.addEventListener('keypress', this.handleKeyEvent, false);
+      document.querySelector('.bitmovinplayer-container')?.removeEventListener('keydown', this.preventScrolling, false);
+      document.querySelector('.bitmovinplayer-container')?.removeEventListener('keyup', this.handleKeyEvent, false);
     }
   }
 
@@ -287,9 +287,9 @@ export class PlayerKeyboardControl {
     // set up or remove the listener if necessary
     if (this.isEnabled) {
       if (preventScrolling) {
-        document.querySelector('.bitmovinplayer-container').addEventListener('keydown', this.preventScrolling, false);
+        document.querySelector('.bitmovinplayer-container')?.addEventListener('keydown', this.preventScrolling, false);
       } else {
-        document.querySelector('.bitmovinplayer-container').removeEventListener('keydown', this.preventScrolling, false);
+        document.querySelector('.bitmovinplayer-container')?.removeEventListener('keydown', this.preventScrolling, false);
       }
     }
   }
