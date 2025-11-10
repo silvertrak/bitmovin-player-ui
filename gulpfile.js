@@ -176,6 +176,7 @@ gulp.task('sass', function() {
       // Includes node_modules of the current module, or, if used as a dependency in a supermodule where this
       // gulpfile is reused, includes node_modules of the supermodule
       './node_modules'],
+    silenceDeprecations: ['legacy-js-api'],
   }).on('error', sass.logError))
   .pipe(postcss([
     autoprefixer(),
