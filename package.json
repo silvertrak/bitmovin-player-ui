@@ -28,7 +28,7 @@
     "@types/jest": "^29.5.12",
     "@types/jsdom": "^21.1.0",
     "autoprefixer": "^10.4.14",
-    "bitmovin-player": "^8.260.0",
+    "bitmovin-player": "^8.233.0",
     "browser-sync": "^2.29.0",
     "browserify": "^17.0.0",
     "cssnano": "^5.1.15",
@@ -49,7 +49,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "merge2": "^1.4.1",
     "postcss-svg": "^3.0.0",
-    "sass": "^1.100.0",
+    "sass": "^1.59.3",
     "semver": "^7.5.4",
     "stream-combiner2": "^1.1.1",
     "ts-jest": "^29.0.5",
@@ -63,7 +63,7 @@
     "yargs": "^17.7.1"
   },
   "dependencies": {
-    "postcss": "^8.5.15"
+    "postcss": "^8.4.38"
   },
   "publishConfig": {
     "@silvertrak:registry": "https://npm.pkg.github.com/"
